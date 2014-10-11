@@ -1,0 +1,69 @@
+Copying: Copyright (c) 1989 Codemist and the University of Bath
+
+ Use, copying, and distribution permitted, provided the copyright
+message is retained intact.
+
+Telos in Common Lisp.  Copyright (C) Russell Bradford, August 1992,
+                                                       August 1993,
+rjb@maths.bath.ac.uk.
+
+For educational use only.
+
+An implementation of Telos as taken from the EuLisp document version 0.95,
+and from the "Balancing" paper by Harry Bretthauer et al.
+
+There are some differences with the above descriptions, mostly due to
+the 2-valued nature of CL, some due to a passing attempt to integrate with the
+usual type hierarchy of CL, others due to laziness on my part.
+
+Disclaimer: this code was written to help me to understand Telos and MOPs
+in general.  Thus there are probably many features, naiveities, or even bugs.
+Plus the optimisations are somewhat simplistic.  I am interested in
+hearing about bugs/improvements and so on, but won't necessarily act upon
+them.
+
+Developed on AKCL, has run on CMU, Clisp, HCL and WCL in its lifetime.  Works
+best when compiled: otherwise somewhat slow!  See the documentation strings for
+defclass, defgeneric, defmethod for more information.
+
+Added attractions:
+describe tells you much about an object.
+defstructure is a simple implementation of structures.
+class-hierarchy gives the current subclass hierarchy.
+instance-hierarchy gives the current class instance hierarchy.
+
+#+BEGIN_SRC 
+Version 2.0:  First released version RJB 92/10/27
+        2.1:  Fixed bug in sorting applicable methods that was revealed by MI
+              module RJB 92/10/29
+        2.2:  Disambiguate find-key returning () to indicate key absent;
+              more checking in add-method and generic-prin RJB 93/01/11
+        2.3:  Add remove-subclass and change defclass to aid debugging
+              RJB 93/01/18
+        2.4:  Add method-lambda, call-method-function, apply-method-function;
+              change .method-list. to be a list of method-function-lambdas
+              RJB 93/01/20
+        2.5:  Major renaming of parts, now classes are <classes>
+              RJB 93/01/29
+        2.6:  Some tidying and rearrangement of redundant code: removed last
+              traces of support for unrestricted metaclasses
+              RJB 93/02/03
+        2.7:  Added generic-lambda, and subsequent tidying; added
+              selective discrimination
+              RJB 93/03/18
+        2.8:  Altered inheritance of initargs and initforms; added slot
+              initargs RJB 93/04/06
+        3.0:  Class hierarchy rearranged and names changed to reflect latest
+              EuLisp definition; default slot accessors are now simple
+              functions; general other tidying RJB 93/12/01
+        3.1:  Bug in lookup of methods on generics with non-discriminating
+              arguments fixed RJB 93/12/17
+#+END_SRC
+
+Thoughts for the day:
+Have add-method to call compute-discriminating-function et al, and do
+extra optimisation.
+Share method-functions amongst compatible methods.
+Lazy finalization of classes and gfs.
+trace-method
+
